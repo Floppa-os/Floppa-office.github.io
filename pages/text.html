@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Текстовый редактор — Floppa Office</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        #editor {
+            width: 100%;
+            height: 60vh;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Текстовый редактор</h1>
+            <a href="../index.html">← Вернуться в меню</a>
+        </header>
+        <textarea id="editor" placeholder="Начните печатать..."></textarea>
+        <button onclick="saveText()">Сохранить</button>
+        <p id="status"></p>
+    </div>
+    <script src="../js/textEditor.js"></script>
+</body>
+</html>
