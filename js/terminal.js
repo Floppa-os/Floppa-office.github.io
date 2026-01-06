@@ -13,6 +13,7 @@ const commands = {
   info          - Информация о системе
   version       - Версия Floppa Office
   reset         - Полный сброс (подтверждение)
+  floppa        - Шлёпа
 `;
     },
     clear: () => {
@@ -27,15 +28,30 @@ const commands = {
         }
         return JSON.stringify(data, null, 2);
     },
+    floppa: () => {
+    return `
+┌──────────────────────────────┐
+│    ███████  ███████         │
+│   ██     ██ ██    ██        │
+│   ██        ██    ██        │
+│    ██████   ███████         │
+│        ██   ██              │
+│   ██     ██ ██              │
+│    ███████ ██              │
+└──────────────────────────────┘
+   Floppa Office — ваш офис в браузере
+`;
+},
+
     info: () => {
         return `
-Floppa Office v1.0
-Платформа: Веб-приложение
+Floppa Office v1.8
+Платформа: Приложение HTML
 Хранилище: localStorage
 Текущая дата: ${new Date().toLocaleString()}
 `;
     },
-    version: () => 'Floppa Office 1.0 (Build 20260106)',
+    version: () => 'Floppa Office 1.8 (Build 20260106)',
     rm: (target) => {
         if (!target) return 'Ошибка: укажите цель (text, spreadsheet, presentation, db, all)';
 
