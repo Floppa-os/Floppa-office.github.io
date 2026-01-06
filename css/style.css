@@ -248,3 +248,20 @@ input[type="text"]:focus {
     flex: 1;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
+/* Стили терминала */
+.terminal-prompt {
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    margin-right: 10px;
+}
+
+#output pre {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #333;
+    border-left: 3px solid #00ff00;
+}
+
+#command-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
