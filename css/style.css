@@ -265,3 +265,67 @@ input[type="text"]:focus {
 #command-input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
+/* Стили для математического калькулятора */
+.math-calculator {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.math-calculator h3 {
+    color: #4CAF50;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.calc-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#math-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: #fff;
+    font-size: 16px;
+}
+
+#math-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.calc-input button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.calc-input button:hover {
+    background-color: #3a8f45;
+}
+
+.calc-result {
+    min-height: 40px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    color: #0f0;
+    font-weight: bold;
+}
+
+.calc-help {
+    margin-top: 15px;
+    color: #bbb;
+    font-size: 14px;
+    line-height: 1.5;
+}
