@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Базы данных — Floppa Office</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .db-container {
+            display: flex;
+            gap: 20px;
+            height: 60vh;
+        }
+        .db-list {
+            width: 25%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+        .table-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px dashed #ccc;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .table-item.active {
+            border-color: #4CAF50;
+            background-color: #e0f7fa;
+            font-weight: bold;
+        }
+        .editor-area {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            background: #fff;
+            overflow: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Базы данных</h1>
+            <a href="../index.html">← Вернуться в меню</a>
+        </header>
+
+        <div class="db-container">
+            <!-- Список таблиц -->
+            <div class="db-list" id="tablesList">
+                <div class="table-item active" data-table="users">users</div>
+            </div>
+
+            <!-- Редактор таблицы -->
+            <div class="editor-area">
+                <h2 id="tableName">Таблица: users</h2>
+
+                <table id="tableData">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" value="1"></td>
+                            <td><input type="text" value="Иван"></td>
+                            <td><input type="text" value="ivan@example.com"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button onclick="addRow()">+ Добавить строку</button>
+                <button onclick="deleteRow()">− Удалить строку</button>
+                <button onclick="saveTable()">Сохранить таблицу</button>
+                <button onclick="createTable()">Создать новую таблицу</button>
+
+                <div id="tableForm" style="margin-top: 20px; display: none;">
+                    <h3>Создать таблицу</h3>
+                    <input type="text" id="newTableName" placeholder="Название таблицы">
+                    <textarea id="tableSchema" placeholder="Схема (JSON): [{'name':'ID','type':'int'},...]"></textarea>
+                    <button onclick="confirmCreateTable()">Создать</button>
+                    <button onclick="cancelCreateTable()">Отмена</button>
+                </div>
+
+                <p id="dbStatus"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/database.js"></script>
+</body>
+</html>
