@@ -1,0 +1,8 @@
+  help          - Показать список команд
+  clear         - Очистить экран
+  ls            - Показать все сохранённые данные
+  rm    - Удалить данные (target: text, spreadsheet, presentation, db, all)
+  info          - Информация о системе
+  version       - Версия Floppa Office
+  reset         - Полный сброс (подтверждение)
+  floppa        - Шлёпа
