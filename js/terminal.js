@@ -145,3 +145,23 @@ document.getElementById('command-input').addEventListener('keydown', (e) => {
         executeCommand();
     }
 });
+// Функция для вычисления математического выражения
+function calculateMath() {
+    const input = document.getElementById('math-input').value;
+    const resultDiv = document.getElementById('math-result');
+
+
+    try {
+        // Заменяем pi и e на числовые значения
+        let expr = input
+            .replace(/pi/gi, Math.PI)
+            .replace(/e/gi, Math.E);
+
+        // Вычисляем выражение с помощью Function
+        const result = new Function('return ' + expr)();
+
+        resultDiv.innerHTML = `<strong>Результат:</strong> ${result}`;
+    } catch (error) {
+        resultDiv.innerHTML = `<strong>Ошибка:</strong> Некорректное выражение. Проверьте синтаксис.`;
+    }
+}
