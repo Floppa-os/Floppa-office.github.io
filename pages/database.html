@@ -4,75 +4,208 @@
     <meta charset="UTF-8">
     <title>Базы данных — Floppa Office</title>
     <link rel="stylesheet" href="../css/style.css">
-    <style>
+<style>
+    /* Общие настройки */
+    * {
+        box-sizing: border-box;
+    }
+
+    .db-container {
+        display: flex;
+        gap: 20px;
+        height: 70vh;
+        margin-top: 10px;
+    }
+
+    /* Панель списка таблиц */
+    .db-list {
+        width: 22%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        overflow-y: auto;
+        max-height: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-item {
+        padding: 12px 15px;
+        margin: 6px 0;
+        border: 1px dashed #ccc;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        font-family: 'Consolas', monospace;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .table-item:hover {
+        background-color: #e9f1f7;
+        border-color: #4CAF50;
+    }
+
+    .table-item.active {
+        border-color: #4CAF50;
+        background-color: #e0f7fa;
+        color: #212121;
+        font-weight: 600;
+        border-width: 2px;
+    }
+
+    /* Область редактирования */
+    .editor-area {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background: #ffffff;
+        overflow: auto;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    #tableName {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 8px;
+        font-size: 18px;
+    }
+
+    /* Таблица данных */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f8e9;
+        transition: background-color 0.3s;
+    }
+
+    /* Формы ввода */
+    input, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        margin: 6px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+        font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    /* Кнопки */
+    button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 8px 6px 8px 0;
+        padding: 10px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s, transform 0.1s;
+        white-space: nowrap;
+    }
+
+    button:hover {
+        background-color: #45a049;
+        transform: translateY(-1px);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    /* Форма создания таблицы */
+    #tableForm {
+        margin-top: 25px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        border-left: 4px solid #4CAF50;
+    }
+
+    #tableForm h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: #4CAF50;
+        font-size: 16px;
+    }
+
+    /* Статус */
+    #dbStatus {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    /* Сообщения об успехе/ошибке */
+    #dbStatus[data-status="success"] {
+        background-color: #dff0d8;
+        color: #3c763d;
+        border: 1px solid #d6e9c6;
+    }
+
+    #dbStatus[data-status="error"] {
+        background-color: #f2dede;
+        color: #a94442;
+        border: 1px solid #ebccd1;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
         .db-container {
-            display: flex;
-            gap: 20px;
-            height: 60vh;
+            flex-direction: column;
         }
-        .db-list {
-            width: 25%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            overflow-y: auto;
-        }
-        .table-item {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px dashed #ccc;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        .table-item.active {
-            border-color: #4CAF50;
-            background-color: #e0f7fa;
-            font-weight: bold;
-        }
-        .editor-area {
-            flex: 1;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            background: #fff;
-            overflow: auto;
-        }
-        table {
+        .db-list, .editor-area {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            margin: 5px;
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    }
+</style>
+
 </head>
 <body>
     <div class="container">
