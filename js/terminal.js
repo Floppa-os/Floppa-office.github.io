@@ -75,6 +75,26 @@ Floppa Office v1.8
                 return `Неизвестная цель: ${target}. Используйте: text, spreadsheet, presentation, db, all`;
         }
     },
+    mathcalc: () => {
+    return `<div class="math-calculator">
+  <h3>Математический калькулятор [Floppa Math v1.0]</h3>
+  <div class="calc-input">
+    <input type="text" id="math-input" placeholder="Введите выражение (например: 2 + 2, sqrt(16), sin(pi/2))">
+    <button onclick="calculateMath()">=</button>
+  </div>
+  <div id="math-result" class="calc-result">
+    <!-- Результат будет выведен сюда -->
+  </div>
+  <div class="calc-help">
+    <strong>Поддерживаемые операции:</strong><br>
+    + − * / ^ (возведение в степень)<br>
+    sqrt(x), sin(x), cos(x), tan(x), log(x) (натуральный логарифм)<br>
+    pi, e<br>
+    Скобки: ( )
+  </div>
+</div>`;
+},
+
     reset: () => {
         const confirm = window.confirm('Вы уверены? Это удалит ВСЕ данные Floppa Office!');
         if (confirm) {
